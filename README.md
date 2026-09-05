@@ -67,6 +67,19 @@ JSON with sorted keys, compact separators, default ASCII escaping and no NaN.
 Do not relabel fixture inputs as a real benchmark. Source commits and input
 hashes support reproducibility; unsigned receipts do not prove signer identity.
 
+## Recorded native run
+
+`evidence/2026-09-05/crosscheck-native-scifact-20260905.json` records an actual
+same-machine run over all 5,183 cached public SciFact documents and 300 test
+queries. The FastAPI side was called using an actual loopback HTTP POST and
+the ephemeral server was stopped afterward. With identical inputs and BM25
+parameters, nDCG@10 was 0.6380 (stdlib) and 0.6643898053153046 (FastAPI).
+The 3.972% relative difference is **DIVERGENT** at the declared 1% tolerance.
+The native tokenizers differ; this receipt demonstrates the disagreement,
+not interchangeability or a performance ranking. Full normalized input chains,
+native records, source pins and input hashes are retained. CI recomputes both
+the complete bundle hash and dual report; it does not rerun the corpus benchmark.
+
 ## License
 
 Apache-2.0 — see LICENSE (same text as the org's other bench repos).

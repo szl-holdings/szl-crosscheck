@@ -1,0 +1,2795 @@
+[
+  {
+    "chain_hash": "d360bc08901f654cd38167626ea51fe442e7e2169ae0af7ac7a4cd705714cc11",
+    "context": {
+      "dataset_revision": "BEIR/scifact:test:content-sha256:843e5b427058de4afc2fc2f1c751ded089909f51f47c6189bf3e49b40c70e1ed",
+      "input_hashes": {
+        "corpus": "a7fe9269b29b05dbdb9409757b349126e3f6d609737eda728784be0e426f6535",
+        "qrels": "536804d3ad87544db56ae1b9c71bad7aef843d6178ee5a0d60c0291306480857",
+        "queries": "29022818287f98b6abebb1d7c89460d34f84e20cd1d3fd809350cbb86f95f397"
+      },
+      "machine": {
+        "cpu": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+        "identity": "068bc5a3ab4606ac8ea823665a705faee398a5420f271189d1d440e5642edd34",
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.11.9"
+      },
+      "model_revision": "bm25-k1=1.5-b=0.75",
+      "parameters": {
+        "b": 0.75,
+        "k1": 1.5,
+        "top_k": 10
+      },
+      "source": {
+        "commit": "280a94c204ce67ffbb995d99bd2e92a917f913d2",
+        "repository": "szl-holdings/szl-retrieval-bench"
+      }
+    },
+    "harness": "stdlib-retrieval",
+    "native_chain": [
+      {
+        "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "run": {
+          "context": {
+            "dataset_revision": "BEIR/scifact:test:content-sha256:843e5b427058de4afc2fc2f1c751ded089909f51f47c6189bf3e49b40c70e1ed",
+            "input_hashes": {
+              "corpus": "a7fe9269b29b05dbdb9409757b349126e3f6d609737eda728784be0e426f6535",
+              "qrels": "536804d3ad87544db56ae1b9c71bad7aef843d6178ee5a0d60c0291306480857",
+              "queries": "29022818287f98b6abebb1d7c89460d34f84e20cd1d3fd809350cbb86f95f397"
+            },
+            "machine": {
+              "cpu": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+              "identity": "068bc5a3ab4606ac8ea823665a705faee398a5420f271189d1d440e5642edd34",
+              "os": "Windows-10-10.0.26200-SP0",
+              "python": "3.11.9"
+            },
+            "model_revision": "bm25-k1=1.5-b=0.75",
+            "parameters": {
+              "b": 0.75,
+              "k1": 1.5,
+              "top_k": 10
+            },
+            "source": {
+              "commit": "280a94c204ce67ffbb995d99bd2e92a917f913d2",
+              "repository": "szl-holdings/szl-retrieval-bench"
+            }
+          },
+          "result": {
+            "aggregate": {
+              "P@10": 0.0837,
+              "R_precision": 0.5167,
+              "map": 0.6003,
+              "mrr": 0.6086,
+              "ndcg@10": 0.638,
+              "recall@10": 0.7605
+            },
+            "corpus_size": 5183,
+            "elapsed_s": 13.7361,
+            "k": 10,
+            "lane": "bm25",
+            "per_query": {
+              "1": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0002,
+                "mrr": 0.0002,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "100": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1012": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1014": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1019": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1020": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1021": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1024": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1029": {
+                "P@10": 0.2,
+                "R_precision": 0.6667,
+                "map": 0.6989,
+                "mrr": 1.0,
+                "ndcg@10": 0.7654,
+                "recall@10": 0.6667,
+                "state": "MEASURED"
+              },
+              "1041": {
+                "P@10": 0.2,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.525,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1049": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0008,
+                "mrr": 0.0008,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1062": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1086": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1088": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0057,
+                "mrr": 0.0057,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1089": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1099": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1100": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1104": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1107": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1110": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0008,
+                "mrr": 0.0008,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1121": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "113": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1130": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1132": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0045,
+                "mrr": 0.0051,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1137": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1140": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.125,
+                "mrr": 0.125,
+                "ndcg@10": 0.3155,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1144": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1146": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "115": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1150": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1163": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1175": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0333,
+                "mrr": 0.0333,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1179": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.125,
+                "mrr": 0.125,
+                "ndcg@10": 0.3155,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "118": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1180": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1185": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1187": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1191": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0028,
+                "mrr": 0.0028,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1194": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1196": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0098,
+                "mrr": 0.0098,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1197": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0074,
+                "mrr": 0.0074,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1199": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0006,
+                "mrr": 0.0006,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1200": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0027,
+                "mrr": 0.0027,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1202": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1204": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1207": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1213": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0013,
+                "mrr": 0.0013,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1216": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1221": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0032,
+                "mrr": 0.0032,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1225": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1226": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0135,
+                "mrr": 0.0135,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1232": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "124": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1241": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0065,
+                "mrr": 0.0065,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1245": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0026,
+                "mrr": 0.0026,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1259": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1262": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1266": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "127": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1270": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1271": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1272": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0077,
+                "mrr": 0.0077,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1273": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1274": {
+                "P@10": 0.3,
+                "R_precision": 0.3333,
+                "map": 0.4667,
+                "mrr": 0.5,
+                "ndcg@10": 0.6448,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1278": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0012,
+                "mrr": 0.0012,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1279": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.002,
+                "mrr": 0.002,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "128": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1280": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0345,
+                "mrr": 0.0345,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1281": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0004,
+                "mrr": 0.0004,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1282": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "129": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1290": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1292": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1298": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "13": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0057,
+                "mrr": 0.0057,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "130": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1303": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0204,
+                "mrr": 0.0204,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1316": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1667,
+                "mrr": 0.1667,
+                "ndcg@10": 0.3562,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1319": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "132": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0032,
+                "mrr": 0.0032,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1320": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "133": {
+                "P@10": 0.2,
+                "R_precision": 0.0,
+                "map": 0.1543,
+                "mrr": 0.1429,
+                "ndcg@10": 0.2152,
+                "recall@10": 0.4,
+                "state": "MEASURED"
+              },
+              "1332": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0016,
+                "mrr": 0.0016,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1335": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1336": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1337": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1339": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1344": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1352": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1359": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1362": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1363": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1368": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0556,
+                "mrr": 0.0556,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "137": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1370": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1379": {
+                "P@10": 0.2,
+                "R_precision": 0.25,
+                "map": 0.3332,
+                "mrr": 0.5,
+                "ndcg@10": 0.3973,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "1382": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0769,
+                "mrr": 0.0769,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "1385": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1389": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "1395": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0016,
+                "mrr": 0.0016,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "141": {
+                "P@10": 0.2,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "142": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "143": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "146": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "148": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "163": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "171": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "179": {
+                "P@10": 0.1,
+                "R_precision": 0.25,
+                "map": 0.1402,
+                "mrr": 0.3333,
+                "ndcg@10": 0.1952,
+                "recall@10": 0.25,
+                "state": "MEASURED"
+              },
+              "180": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "183": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1429,
+                "mrr": 0.1429,
+                "ndcg@10": 0.3333,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "185": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "198": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "208": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "212": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "213": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1667,
+                "mrr": 0.1667,
+                "ndcg@10": 0.3562,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "216": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "217": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "218": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "219": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "230": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "232": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "233": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "236": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "237": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "238": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0455,
+                "mrr": 0.0455,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "239": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0065,
+                "mrr": 0.0065,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "248": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "249": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "261": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.0759,
+                "mrr": 0.1429,
+                "ndcg@10": 0.2044,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "268": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "269": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "274": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "275": {
+                "P@10": 0.1,
+                "R_precision": 0.3333,
+                "map": 0.354,
+                "mrr": 1.0,
+                "ndcg@10": 0.4693,
+                "recall@10": 0.3333,
+                "state": "MEASURED"
+              },
+              "279": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "294": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "295": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "298": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "3": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.25,
+                "mrr": 0.25,
+                "ndcg@10": 0.4307,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "300": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0769,
+                "mrr": 0.0769,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "303": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "312": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.125,
+                "mrr": 0.125,
+                "ndcg@10": 0.3155,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "314": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "324": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.25,
+                "mrr": 0.25,
+                "ndcg@10": 0.4307,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "327": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "338": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "343": {
+                "P@10": 0.2,
+                "R_precision": 0.0,
+                "map": 0.3667,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5438,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "350": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "354": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "36": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1146,
+                "mrr": 0.1667,
+                "ndcg@10": 0.2184,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "362": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "380": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "384": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0833,
+                "mrr": 0.0833,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "385": {
+                "P@10": 0.2,
+                "R_precision": 0.0,
+                "map": 0.2778,
+                "mrr": 0.3333,
+                "ndcg@10": 0.4911,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "386": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "388": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "399": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "410": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "411": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "415": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "42": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "421": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.003,
+                "mrr": 0.003,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "431": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.007,
+                "mrr": 0.007,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "436": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "437": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0006,
+                "mrr": 0.0006,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "439": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1429,
+                "mrr": 0.1429,
+                "ndcg@10": 0.3333,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "440": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1429,
+                "mrr": 0.1429,
+                "ndcg@10": 0.3333,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "443": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "452": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.0751,
+                "mrr": 0.1429,
+                "ndcg@10": 0.2044,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "475": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0833,
+                "mrr": 0.0833,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "478": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0667,
+                "mrr": 0.0667,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "48": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "49": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "491": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "5": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "50": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "501": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "502": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0077,
+                "mrr": 0.0077,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "507": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "508": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0233,
+                "mrr": 0.0233,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "51": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "513": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "514": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0667,
+                "mrr": 0.0667,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "516": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "517": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0222,
+                "mrr": 0.0222,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "521": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "525": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "527": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "528": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "53": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "532": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "533": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "535": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0027,
+                "mrr": 0.0027,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "536": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "539": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "54": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "540": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1061,
+                "mrr": 0.1667,
+                "ndcg@10": 0.2184,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "544": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0081,
+                "mrr": 0.0081,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "549": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "551": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0312,
+                "mrr": 0.0312,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "552": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "554": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1429,
+                "mrr": 0.1429,
+                "ndcg@10": 0.3333,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "56": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "560": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0025,
+                "mrr": 0.0025,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "569": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "57": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "575": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0667,
+                "mrr": 0.0667,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "577": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0002,
+                "mrr": 0.0002,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "578": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "587": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1667,
+                "mrr": 0.1667,
+                "ndcg@10": 0.3562,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "589": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "593": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "597": {
+                "P@10": 0.3,
+                "R_precision": 0.6667,
+                "map": 0.8333,
+                "mrr": 1.0,
+                "ndcg@10": 0.9325,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "598": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "613": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "619": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.0838,
+                "mrr": 0.1667,
+                "ndcg@10": 0.2184,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "623": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0455,
+                "mrr": 0.0455,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "628": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.125,
+                "mrr": 0.125,
+                "ndcg@10": 0.3155,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "636": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "637": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1667,
+                "mrr": 0.1667,
+                "ndcg@10": 0.3562,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "641": {
+                "P@10": 0.1,
+                "R_precision": 0.5,
+                "map": 0.5667,
+                "mrr": 1.0,
+                "ndcg@10": 0.6131,
+                "recall@10": 0.5,
+                "state": "MEASURED"
+              },
+              "644": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "649": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.25,
+                "mrr": 0.25,
+                "ndcg@10": 0.4307,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "659": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "660": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "674": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "684": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "690": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0833,
+                "mrr": 0.0833,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "691": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "692": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "693": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "70": {
+                "P@10": 0.2,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "700": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "702": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "715": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0294,
+                "mrr": 0.0294,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "716": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0008,
+                "mrr": 0.0008,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "718": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "72": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "721": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "723": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "727": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0714,
+                "mrr": 0.0714,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "728": {
+                "P@10": 0.2,
+                "R_precision": 0.5,
+                "map": 0.6,
+                "mrr": 1.0,
+                "ndcg@10": 0.7904,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "729": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "742": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "743": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "744": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "75": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "756": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1111,
+                "mrr": 0.1111,
+                "ndcg@10": 0.301,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "759": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "768": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0003,
+                "mrr": 0.0003,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "770": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "775": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0008,
+                "mrr": 0.0008,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "781": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "783": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.001,
+                "mrr": 0.001,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "784": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "785": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "793": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "800": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0108,
+                "mrr": 0.0108,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "805": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "808": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "811": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "814": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "820": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.04,
+                "mrr": 0.04,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "821": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0455,
+                "mrr": 0.0455,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "823": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "830": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.1,
+                "mrr": 0.1,
+                "ndcg@10": 0.2891,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "831": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0526,
+                "mrr": 0.0526,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "832": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "834": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0435,
+                "mrr": 0.0435,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "837": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "839": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.25,
+                "mrr": 0.25,
+                "ndcg@10": 0.4307,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "845": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "847": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "852": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "859": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "870": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0002,
+                "mrr": 0.0002,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "873": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0579,
+                "mrr": 0.0714,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "879": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "880": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "882": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "887": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0013,
+                "mrr": 0.0013,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "903": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "904": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "907": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "911": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "913": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0012,
+                "mrr": 0.0012,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "914": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0003,
+                "mrr": 0.0003,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "921": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "922": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "936": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "94": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "956": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.2,
+                "mrr": 0.2,
+                "ndcg@10": 0.3869,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "957": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.5,
+                "mrr": 0.5,
+                "ndcg@10": 0.6309,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "960": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "967": {
+                "P@10": 0.2,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "971": {
+                "P@10": 0.4,
+                "R_precision": 0.5,
+                "map": 0.525,
+                "mrr": 0.3333,
+                "ndcg@10": 0.6534,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "975": {
+                "P@10": 0.0,
+                "R_precision": 0.0,
+                "map": 0.0026,
+                "mrr": 0.0026,
+                "ndcg@10": 0.0,
+                "recall@10": 0.0,
+                "state": "MEASURED"
+              },
+              "982": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "985": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "99": {
+                "P@10": 0.1,
+                "R_precision": 1.0,
+                "map": 1.0,
+                "mrr": 1.0,
+                "ndcg@10": 1.0,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              },
+              "993": {
+                "P@10": 0.1,
+                "R_precision": 0.0,
+                "map": 0.3333,
+                "mrr": 0.3333,
+                "ndcg@10": 0.5,
+                "recall@10": 1.0,
+                "state": "MEASURED"
+              }
+            },
+            "queries": 300,
+            "state": "MEASURED"
+          },
+          "type": "bm25_real_cross_implementation"
+        },
+        "self_hash": "c8efb7b5cf700a4733e8dd990d7baca4e837b3ec2051979f3506f44909b817fb",
+        "signature": "UNSIGNED_HONEST",
+        "ts": "2026-09-05T16:08:52Z"
+      }
+    ],
+    "native_schema": "ReceiptChain.self_hash",
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "results": [
+      {
+        "lane": "bm25",
+        "metrics": {
+          "ndcg@10": 0.638,
+          "recall@10": 0.7605
+        },
+        "state": "MEASURED"
+      }
+    ]
+  }
+]
