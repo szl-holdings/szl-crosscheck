@@ -56,7 +56,8 @@ def fastapi_retrieval(run, context, inputs, metric_keys=("ndcg@10", "recall@10")
             raise ValueError(f"native {native_key} mismatch")
     parameters = context["parameters"]
     model = f"bm25-k1={parameters['k1']}-b={parameters['b']}"
-    if run.get("model_revision") != model or run.get("config", {}).get("top_k") != parameters["top_k"]:
+    if (run.get("model_revision") != model or run.get("model_revision") != context["model_revision"]
+            or run.get("config", {}).get("top_k") != parameters["top_k"]):
         raise ValueError("native model/config differs from context")
     if run.get("result_hash") != _native_digest(run.get("metrics"), compact=False):
         raise ValueError("native result hash mismatch")

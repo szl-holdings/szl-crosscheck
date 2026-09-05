@@ -64,3 +64,10 @@ def test_captured_query_mismatch_rejected():
     inputs["queries"]["q1"] = "other"
     with pytest.raises(ValueError, match="queries input hash mismatch"):
         fastapi_retrieval(run, context, inputs)
+
+
+def test_native_model_revision_must_equal_declared_context():
+    inputs, context, chain, run = sample()
+    context["model_revision"] = "a-different-model"
+    with pytest.raises(ValueError, match="model/config differs from context"):
+        fastapi_retrieval(run, context, inputs)
