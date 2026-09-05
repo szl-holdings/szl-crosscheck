@@ -1,0 +1,74 @@
+[
+  {
+    "chain_hash": "d6ca2c2282dec39cfb13e8c0f8209e4936e38b1736323b8108447ddf86616624",
+    "context": {
+      "dataset_revision": "BEIR/scifact:test:content-sha256:843e5b427058de4afc2fc2f1c751ded089909f51f47c6189bf3e49b40c70e1ed",
+      "input_hashes": {
+        "corpus": "a7fe9269b29b05dbdb9409757b349126e3f6d609737eda728784be0e426f6535",
+        "qrels": "536804d3ad87544db56ae1b9c71bad7aef843d6178ee5a0d60c0291306480857",
+        "queries": "29022818287f98b6abebb1d7c89460d34f84e20cd1d3fd809350cbb86f95f397"
+      },
+      "machine": {
+        "cpu": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+        "identity": "068bc5a3ab4606ac8ea823665a705faee398a5420f271189d1d440e5642edd34",
+        "os": "Windows-10-10.0.26200-SP0",
+        "python": "3.11.9"
+      },
+      "model_revision": "bm25-k1=1.5-b=0.75",
+      "parameters": {
+        "b": 0.75,
+        "k1": 1.5,
+        "top_k": 10
+      },
+      "source": {
+        "commit": "825d45ec819ee57ac7bb2ae0448c90396cf38660",
+        "repository": "szl-holdings/retrieval-bench"
+      }
+    },
+    "context_assurance": "CALLER_DECLARED_CAPTURE",
+    "harness": "fastapi-retrieval",
+    "native_limitations": [
+      "HTTP response has no native chain or query hash; the adapter binds captured request inputs"
+    ],
+    "native_run": {
+      "config": {
+        "top_k": 10
+      },
+      "dataset_hash": "66cbb69ed4ad72a7ed3d4104b3aaf3e7a7add9ca0e23165c6da558a9868d5785",
+      "detail": "",
+      "lane": "sparse_bm25",
+      "metrics": {
+        "map@1": 0.5433333333333333,
+        "map@10": 0.6209563492063492,
+        "map@5": 0.6099166666666667,
+        "mrr@1": 0.5433333333333333,
+        "mrr@10": 0.6337208994708994,
+        "mrr@5": 0.6248333333333332,
+        "ndcg@1": 0.5433333333333333,
+        "ndcg@10": 0.6643898053153046,
+        "ndcg@5": 0.6417973890122038,
+        "recall@1": 0.5248333333333333,
+        "recall@10": 0.7816111111111111,
+        "recall@5": 0.7192777777777777
+      },
+      "model_revision": "bm25-k1=1.5-b=0.75",
+      "qrels_hash": "761f6ed18a576ca11917af57e4f9dbe210cfa0b3452ec0652d3de520862ba8e4",
+      "result_hash": "6819f962fb411289e1a8177a6837bce88b9da43f0297e793bc33601b9c17b132",
+      "run_id": "3b0ea71f-37c0-4b8c-8b65-39d7e0f1318c",
+      "status": "MEASURED",
+      "timestamp": 1788624555.272693
+    },
+    "native_schema": "RunReceipt (unchained HTTP response)",
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "results": [
+      {
+        "lane": "bm25",
+        "metrics": {
+          "ndcg@10": 0.6643898053153046,
+          "recall@10": 0.7816111111111111
+        },
+        "state": "MEASURED"
+      }
+    ]
+  }
+]

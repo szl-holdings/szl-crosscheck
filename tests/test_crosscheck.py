@@ -3,10 +3,15 @@ import hashlib, json
 
 from szl_crosscheck.crosscheck import GENESIS, canonical, crosscheck
 
+CONTEXT = {"machine": {"identity": "fixture", "cpu": "fixture", "os": "fixture", "python": "3.12"},
+           "dataset_revision": "fixture-v1", "model_revision": "fixture-bm25",
+           "parameters": {"top_k": 10}, "input_hashes": {k: "a" * 64 for k in ("corpus", "queries", "qrels")},
+           "source": {"repository": "fixture", "commit": "b" * 40}}
+
 
 def make_chain(harness, lanes):
-    results = [{"engine": l, "runs": [1, 2, 3], "metrics": m} for l, m in lanes.items()]
-    r = {"harness": harness, "results": results}
+    results = [{"lane": l, "state": "MEASURED", "metrics": m} for l, m in lanes.items()]
+    r = {"harness": harness, "context": CONTEXT, "results": results}
     payload = dict(r)
     r["prev_hash"] = GENESIS
     r["chain_hash"] = hashlib.sha256((GENESIS + canonical(payload)).encode()).hexdigest()
