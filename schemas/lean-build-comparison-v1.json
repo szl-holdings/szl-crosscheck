@@ -2,43 +2,264 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://a-11-oy.com/schemas/lean-build-comparison-v1.json",
   "title": "Lean Build Comparison Receipt v1",
-  "description": "First artifact of szl-crosscheck#4. Two independent harnesses re-verify the same Lean build and emit a comparison receipt; the only output vocabulary is CONSISTENT / DIVERGENT / INCOMPARABLE. No claim of break or confirmation without a receipt.",
+  "description": "Two independently implemented harnesses re-run the same Lean build and record bounded comparison evidence. CONSISTENT means only that the required observations agree; it never means PROOF_VALID, theorem-correct, secure, or production-ready.",
   "type": "object",
-  "required": ["schema", "target_build", "harness_a", "harness_b", "verdict"],
+  "required": [
+    "schema",
+    "generated_at",
+    "target_build",
+    "harness_a",
+    "harness_b",
+    "comparison",
+    "verdict",
+    "verdict_reasons",
+    "claim_boundary"
+  ],
   "additionalProperties": false,
   "properties": {
-    "schema": { "const": "szl.lean-build-comparison/v1" },
+    "schema": {
+      "const": "szl.lean-build-comparison/v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
     "target_build": {
       "type": "object",
-      "required": ["artifact_ref", "declared_axioms"],
+      "required": [
+        "artifact_ref",
+        "artifact_sha256",
+        "lean_version",
+        "entrypoint",
+        "theorem_name",
+        "reference_statement_sha256",
+        "declared_axioms"
+      ],
       "additionalProperties": false,
       "properties": {
-        "artifact_ref": { "type": "string", "minLength": 1 },
-        "declared_axioms": { "type": "array", "items": { "type": "string" } },
-        "statement_matches_reference": { "type": ["boolean", "null"] }
+        "artifact_ref": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "lean_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entrypoint": {
+          "type": "string",
+          "minLength": 1
+        },
+        "theorem_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference_statement_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "declared_axioms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
       }
     },
-    "harness_a": { "$ref": "#/$defs/harness" },
-    "harness_b": { "$ref": "#/$defs/harness" },
-    "verdict": { "enum": ["CONSISTENT", "DIVERGENT", "INCOMPARABLE"] }
-  },
-  "$defs": {
-    "harness": {
+    "harness_a": {
+      "$ref": "#/$defs/harness"
+    },
+    "harness_b": {
+      "$ref": "#/$defs/harness"
+    },
+    "comparison": {
       "type": "object",
-      "required": ["harness_id", "rebuilt", "kernel_checked"],
+      "required": [
+        "artifact_digest_agreement",
+        "harness_implementation_independent",
+        "runner_identity_independent",
+        "statement_agreement",
+        "axiom_surface_agreement",
+        "dependency_cone_agreement",
+        "kernel_outcome_agreement",
+        "notes"
+      ],
       "additionalProperties": false,
       "properties": {
-        "harness_id": { "type": "string", "minLength": 1 },
-        "rebuilt": { "type": "boolean" },
-        "kernel_checked": { "type": "boolean" },
-        "sorries_in_final_chain": { "type": ["integer", "null"], "minimum": 0 },
-        "dependency_cone": {
-          "type": ["object", "null"],
-          "properties": {
-            "declared_theorems": { "type": "integer", "minimum": 0 },
-            "load_bearing_theorems": { "type": ["integer", "null"], "minimum": 0 }
+        "artifact_digest_agreement": {
+          "type": "boolean"
+        },
+        "harness_implementation_independent": {
+          "type": "boolean"
+        },
+        "runner_identity_independent": {
+          "type": "boolean"
+        },
+        "statement_agreement": {
+          "type": ["boolean", "null"]
+        },
+        "axiom_surface_agreement": {
+          "type": ["boolean", "null"]
+        },
+        "dependency_cone_agreement": {
+          "type": ["boolean", "null"]
+        },
+        "kernel_outcome_agreement": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
           },
-          "additionalProperties": false
+          "uniqueItems": true
+        }
+      }
+    },
+    "verdict": {
+      "enum": ["CONSISTENT", "DIVERGENT", "INCOMPARABLE"]
+    },
+    "verdict_reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "claim_boundary": {
+      "const": "Comparison consistency is not a proof-validity, theorem-correctness, security, or production-readiness claim."
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "git_revision": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "harness": {
+      "type": "object",
+      "required": [
+        "harness_id",
+        "runner_identity",
+        "implementation_sha256",
+        "source_revision",
+        "completed_at",
+        "rebuilt",
+        "kernel_checked",
+        "exit_code",
+        "artifact_sha256",
+        "observed_statement_sha256",
+        "statement_matches_reference",
+        "observed_axioms",
+        "sorries_in_final_chain",
+        "dependency_cone",
+        "log_sha256",
+        "errors"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "harness_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "runner_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "implementation_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "source_revision": {
+          "$ref": "#/$defs/git_revision"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rebuilt": {
+          "type": "boolean"
+        },
+        "kernel_checked": {
+          "type": "boolean"
+        },
+        "exit_code": {
+          "type": "integer"
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "observed_statement_sha256": {
+          "oneOf": [
+            { "$ref": "#/$defs/sha256" },
+            { "type": "null" }
+          ]
+        },
+        "statement_matches_reference": {
+          "type": ["boolean", "null"]
+        },
+        "observed_axioms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "sorries_in_final_chain": {
+          "type": ["integer", "null"],
+          "minimum": 0
+        },
+        "dependency_cone": {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "declared_theorems",
+                "load_bearing_theorems",
+                "sha256"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "declared_theorems": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "load_bearing_theorems": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "sha256": {
+                  "$ref": "#/$defs/sha256"
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "log_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
         }
       }
     }
