@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://a-11-oy.com/schemas/lean-build-comparison-v1.json",
+  "title": "Lean Build Comparison Receipt v1",
+  "description": "First artifact of szl-crosscheck#4. Two independent harnesses re-verify the same Lean build and emit a comparison receipt; the only output vocabulary is CONSISTENT / DIVERGENT / INCOMPARABLE. No claim of break or confirmation without a receipt.",
+  "type": "object",
+  "required": ["schema", "target_build", "harness_a", "harness_b", "verdict"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "szl.lean-build-comparison/v1" },
+    "target_build": {
+      "type": "object",
+      "required": ["artifact_ref", "declared_axioms"],
+      "additionalProperties": false,
+      "properties": {
+        "artifact_ref": { "type": "string", "minLength": 1 },
+        "declared_axioms": { "type": "array", "items": { "type": "string" } },
+        "statement_matches_reference": { "type": ["boolean", "null"] }
+      }
+    },
+    "harness_a": { "$ref": "#/$defs/harness" },
+    "harness_b": { "$ref": "#/$defs/harness" },
+    "verdict": { "enum": ["CONSISTENT", "DIVERGENT", "INCOMPARABLE"] }
+  },
+  "$defs": {
+    "harness": {
+      "type": "object",
+      "required": ["harness_id", "rebuilt", "kernel_checked"],
+      "additionalProperties": false,
+      "properties": {
+        "harness_id": { "type": "string", "minLength": 1 },
+        "rebuilt": { "type": "boolean" },
+        "kernel_checked": { "type": "boolean" },
+        "sorries_in_final_chain": { "type": ["integer", "null"], "minimum": 0 },
+        "dependency_cone": {
+          "type": ["object", "null"],
+          "properties": {
+            "declared_theorems": { "type": "integer", "minimum": 0 },
+            "load_bearing_theorems": { "type": ["integer", "null"], "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  }
+}
