@@ -80,6 +80,40 @@ not interchangeability or a performance ranking. Full normalized input chains,
 native records, source pins and input hashes are retained. CI recomputes both
 the complete bundle hash and dual report; it does not rerun the corpus benchmark.
 
+## Independent Lean-build comparison
+
+`schemas/lean-build-comparison-v1.json` and
+`szl_crosscheck.validate_lean_build_receipt` define a second, deliberately
+narrow comparison plane for large Lean builds. The target is bound to an exact
+artifact digest, Lean version, entrypoint, theorem name, reference-statement
+digest and declared axiom surface. Each harness must record its own implementation
+digest, runner identity, exact source revision, rebuild and kernel outcomes,
+statement observation, axiom observation, final-chain `sorry` count, dependency
+cone and log digest.
+
+The semantic validator recomputes every comparison field and the final verdict:
+
+- `CONSISTENT` means all required bounded observations agree across independently
+  identified harness implementations and runners;
+- `DIVERGENT` names a complete but disagreeing statement, axiom, dependency or
+  kernel observation;
+- `INCOMPARABLE` is mandatory when independence, target identity, execution,
+  statement fidelity, dependency evidence or final-chain evidence is incomplete.
+
+A caller cannot write `CONSISTENT` over disagreeing or incomplete evidence: the
+receipt fails validation unless its comparison, verdict and ordered reasons are
+exactly derivable from the observations. This contract never emits `BREAK` or
+`PROOF_VALID`. Comparison consistency is not proof validity, theorem correctness,
+security, or production readiness; the Lean kernel's own check remains the
+relevant formal check.
+
+```python
+from szl_crosscheck import validate_lean_build_receipt
+
+validated = validate_lean_build_receipt(receipt)
+print(validated["verdict"], validated["verdict_reasons"])
+```
+
 ## License
 
 Apache-2.0 — see LICENSE (same text as the org's other bench repos).
