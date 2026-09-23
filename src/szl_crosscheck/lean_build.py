@@ -20,6 +20,7 @@ CLAIM_BOUNDARY = (
 VERDICTS = frozenset({"CONSISTENT", "DIVERGENT", "INCOMPARABLE"})
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 GIT_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+DIGEST_QUALIFIED_ARTIFACT_RE = re.compile(r"@sha256:([0-9a-f]{64})$")
 
 TOP_LEVEL_KEYS = frozenset(
     {
@@ -180,8 +181,18 @@ def _text_list(value: Any, label: str) -> list[str]:
 def _validate_target(value: Any) -> Mapping[str, Any]:
     target = _mapping(value, "target_build")
     _exact_keys(target, TARGET_KEYS, "target_build")
-    _text(target["artifact_ref"], "target_build.artifact_ref")
-    _digest(target["artifact_sha256"], "target_build.artifact_sha256")
+    artifact_ref = _text(target["artifact_ref"], "target_build.artifact_ref")
+    artifact_sha256 = _digest(target["artifact_sha256"], "target_build.artifact_sha256")
+    if "@sha256:" in artifact_ref:
+        match = DIGEST_QUALIFIED_ARTIFACT_RE.search(artifact_ref)
+        if match is None:
+            raise ReceiptValidationError(
+                "target_build.artifact_ref contains a malformed sha256 digest qualifier"
+            )
+        if match.group(1) != artifact_sha256:
+            raise ReceiptValidationError(
+                "target_build.artifact_ref digest disagrees with target_build.artifact_sha256"
+            )
     _text(target["lean_version"], "target_build.lean_version")
     _text(target["entrypoint"], "target_build.entrypoint")
     _text(target["theorem_name"], "target_build.theorem_name")
