@@ -51,7 +51,11 @@ def fastapi_retrieval(run, context, inputs, metric_keys=("ndcg@10", "recall@10")
     for key in ("corpus", "queries", "qrels"):
         if hashlib.sha256(canonical(inputs[key]).encode()).hexdigest() != context["input_hashes"][key]:
             raise ValueError(f"{key} input hash mismatch")
-    for native_key, input_key in (("dataset_hash", "corpus"), ("qrels_hash", "qrels")):
+    query_hash_supplied = "query_hash" in run
+    native_bindings = [("dataset_hash", "corpus"), ("qrels_hash", "qrels")]
+    if query_hash_supplied:
+        native_bindings.append(("query_hash", "queries"))
+    for native_key, input_key in native_bindings:
         if run.get(native_key) != _native_digest(inputs[input_key], compact=False):
             raise ValueError(f"native {native_key} mismatch")
     parameters = context["parameters"]
@@ -61,9 +65,13 @@ def fastapi_retrieval(run, context, inputs, metric_keys=("ndcg@10", "recall@10")
         raise ValueError("native model/config differs from context")
     if run.get("result_hash") != _native_digest(run.get("metrics"), compact=False):
         raise ValueError("native result hash mismatch")
+    limitations = ["HTTP response has no native chain; matching hashes do not prove execution, accuracy, or identity"]
+    if not query_hash_supplied:
+        limitations.append("Legacy HTTP response omits query_hash; query binding relies on captured request inputs")
     return seal({"harness": "fastapi-retrieval", "context": context,
                  "native_schema": "RunReceipt (unchained HTTP response)", "native_run": run,
                  "context_assurance": "CALLER_DECLARED_CAPTURE",
-                 "native_limitations": ["HTTP response has no native chain or query hash; the adapter binds captured request inputs"],
+                 "native_query_hash_state": "MATCHED" if query_hash_supplied else "UNVERIFIED_LEGACY",
+                 "native_limitations": limitations,
                  "results": [{"state": "MEASURED", "lane": "bm25",
                               "metrics": {k: run["metrics"][k] for k in metric_keys}}]})

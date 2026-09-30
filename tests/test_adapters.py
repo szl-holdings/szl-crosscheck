@@ -21,6 +21,7 @@ def sample():
     record["self_hash"] = hashlib.sha256(json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
     native_hash = lambda value: hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
     run = {"status": "MEASURED", "lane": "sparse_bm25", "dataset_hash": native_hash(inputs["corpus"]),
+           "query_hash": native_hash(inputs["queries"]),
            "qrels_hash": native_hash(inputs["qrels"]), "model_revision": context["model_revision"],
            "config": {"top_k": 10}, "metrics": metrics, "result_hash": native_hash(metrics)}
     return inputs, context, [record], run
@@ -33,7 +34,10 @@ def test_native_adapters_compare_with_distinct_canonical_formats():
     assert verify_chain(a)[0] and verify_chain(b)[0]
     assert crosscheck(a, b)["verdict"] == "CONSISTENT"
     assert b[0]["native_schema"] == "RunReceipt (unchained HTTP response)"
-    assert "no native chain or query hash" in b[0]["native_limitations"][0]
+    assert "no native chain" in b[0]["native_limitations"][0]
+    assert b[0]["native_query_hash_state"] == "MATCHED"
+    assert b[0]["native_run"]["query_hash"] == run["query_hash"]
+    assert b[0]["context_assurance"] == "CALLER_DECLARED_CAPTURE"
     assert a[0]["native_chain"] == chain
     run["metrics"]["ndcg@10"] = 0
     assert verify_chain(b)[0]
@@ -51,7 +55,7 @@ def test_native_stdlib_tamper_and_context_rejected():
         stdlib_retrieval(chain, context)
 
 
-@pytest.mark.parametrize("field", ["dataset_hash", "qrels_hash", "result_hash", "model_revision"])
+@pytest.mark.parametrize("field", ["dataset_hash", "query_hash", "qrels_hash", "result_hash", "model_revision"])
 def test_native_response_binding_mismatch_rejected(field):
     inputs, context, chain, run = sample()
     run[field] = "bad"
@@ -71,3 +75,55 @@ def test_native_model_revision_must_equal_declared_context():
     context["model_revision"] = "a-different-model"
     with pytest.raises(ValueError, match="model/config differs from context"):
         fastapi_retrieval(run, context, inputs)
+
+
+@pytest.mark.parametrize("supplied", [None, "", "bad", "0" * 64, True, 1, [], {}])
+def test_supplied_native_query_hash_must_match_captured_queries(supplied):
+    inputs, context, chain, run = sample()
+    run["query_hash"] = supplied
+    with pytest.raises(ValueError, match="native query_hash mismatch"):
+        fastapi_retrieval(run, context, inputs)
+
+
+def test_recaptured_query_context_cannot_replace_native_query_binding():
+    inputs, context, chain, run = sample()
+    inputs["queries"]["q1"] = "different query"
+    context["input_hashes"]["queries"] = hashlib.sha256(canonical(inputs["queries"]).encode()).hexdigest()
+    with pytest.raises(ValueError, match="native query_hash mismatch"):
+        fastapi_retrieval(run, context, inputs)
+
+
+def test_native_query_hash_matches_producer_unicode_format_and_is_preserved():
+    inputs, context, chain, run = sample()
+    inputs["queries"] = {"q2": "東京", "q1": "café"}
+    context["input_hashes"]["queries"] = hashlib.sha256(canonical(inputs["queries"]).encode()).hexdigest()
+    expected = hashlib.sha256(json.dumps(inputs["queries"], sort_keys=True).encode()).hexdigest()
+    run["query_hash"] = expected
+    adapted = fastapi_retrieval(run, context, inputs)
+    assert adapted[0]["native_query_hash_state"] == "MATCHED"
+    assert adapted[0]["native_run"]["query_hash"] == expected
+    assert adapted[0]["context_assurance"] == "CALLER_DECLARED_CAPTURE"
+    run["query_hash"] = "changed after adaptation"
+    assert adapted[0]["native_run"]["query_hash"] == expected
+    assert verify_chain(adapted)[0]
+
+
+@pytest.mark.parametrize("json_options", [{"ensure_ascii": False}, {"separators": (",", ":")}])
+def test_native_query_hash_rejects_different_json_canonicalization(json_options):
+    inputs, context, chain, run = sample()
+    run["query_hash"] = hashlib.sha256(json.dumps(inputs["queries"], sort_keys=True, **json_options).encode()).hexdigest()
+    with pytest.raises(ValueError, match="native query_hash mismatch"):
+        fastapi_retrieval(run, context, inputs)
+
+
+def test_legacy_response_without_query_hash_is_explicitly_capture_only():
+    inputs, context, chain, run = sample()
+    del run["query_hash"]
+    adapted = fastapi_retrieval(run, context, inputs)
+    assert verify_chain(adapted)[0]
+    assert adapted[0]["native_query_hash_state"] == "UNVERIFIED_LEGACY"
+    assert "query_hash" not in adapted[0]["native_run"]
+    assert adapted[0]["context_assurance"] == "CALLER_DECLARED_CAPTURE"
+    assert any("Legacy HTTP response omits query_hash" in limitation
+               for limitation in adapted[0]["native_limitations"])
+    assert crosscheck(stdlib_retrieval(chain, context), adapted)["verdict"] == "CONSISTENT"
