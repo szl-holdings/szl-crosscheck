@@ -54,8 +54,18 @@ stdlib chain and requires its final `run.context` to equal the supplied context.
 Its final `run.result` must be a measured BM25 result at the declared cutoff.
 `fastapi_retrieval(response, context, captured_inputs)` checks the HTTP response's
 dataset, qrels, model/config and result hashes, then binds all three captured
-input hashes. The native HTTP response has no query hash: request capture is
-caller-declared, not cryptographic proof that the server processed that query.
+input hashes. When `query_hash` is supplied, it must also match the captured
+queries using the native producer's SHA-256 over UTF-8 JSON with sorted keys,
+default ASCII escaping and default (noncompact) separators. Null, malformed or
+mismatching supplied hashes are rejected. This matches the
+[pinned retrieval-bench producer](https://github.com/szl-holdings/retrieval-bench/blob/d16b1c8945725f266af25dc0f28ff65314f6100d/retrieval/runner.py#L30-L65).
+
+The normalized envelope records `native_query_hash_state = MATCHED` when that
+hash matches. Historical responses that omit the field remain supported with
+`native_query_hash_state = UNVERIFIED_LEGACY` and an explicit capture-only limitation;
+an absent field is different from a supplied null or invalid hash. In both cases
+request capture and context remain caller-declared. Matching hashes establish
+input integrity, not proof of server execution, semantic accuracy or signer identity.
 Both adapters compare only the shared nDCG@10 and Recall@10 by default; they
 retain the complete native records, including non-compared metrics.
 
