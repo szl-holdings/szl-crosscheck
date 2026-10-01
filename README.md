@@ -1,5 +1,7 @@
 # szl-crosscheck
 
+[![PyPI](https://img.shields.io/pypi/v/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/) [![Python](https://img.shields.io/pypi/pyversions/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/)
+
 Two independent implementations of the same measurement disagree quietly more
 often than teams admit. This package ends that: feed it the receipt chains from
 **both** harnesses and get one verdict — `CONSISTENT`, `DIVERGENT` (with the
