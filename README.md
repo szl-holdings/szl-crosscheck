@@ -1,6 +1,6 @@
 # szl-crosscheck
 
-[![PyPI](https://img.shields.io/pypi/v/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/) [![Python](https://img.shields.io/pypi/pyversions/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/)
+[![PyPI](https://img.shields.io/pypi/v/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/) [![Python](https://img.shields.io/pypi/pyversions/szl-crosscheck)](https://pypi.org/project/szl-crosscheck/) [![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/szl-holdings/szl-crosscheck/badge)](https://scorecard.dev/viewer/?uri=github.com/szl-holdings/szl-crosscheck)
 
 Two independent implementations of the same measurement disagree quietly more
 often than teams admit. This package ends that: feed it the receipt chains from
