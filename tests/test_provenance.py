@@ -23,7 +23,8 @@ def test_context_mismatch_is_incomparable(key):
 
 
 def test_missing_provenance_is_invalid():
-    assert crosscheck(A, changed(B, lambda p: p.pop("context")))["verdict"] == "INVALID"
+    without_context = changed(B, lambda p: p.pop("context"))  # built outside the assert
+    assert crosscheck(A, without_context)["verdict"] == "INVALID"
 
 
 def test_disjoint_metric_keys_cannot_pass():
