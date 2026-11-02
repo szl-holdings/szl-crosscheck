@@ -1,4 +1,5 @@
 """Verify complete inputs before comparing compatible measurements."""
+from fractions import Fraction
 import hashlib
 import json
 import math
@@ -124,7 +125,14 @@ def crosscheck(chain_a, chain_b, rel_tol=0.01):
             for key in common:
                 a, b = lanes_a[lane][key], lanes_b[lane][key]
                 scale = max(abs(a), abs(b), 1e-12)
-                deltas[key] = abs(a / scale - b / scale)
+                if type(a) is int or type(b) is int:
+                    # Normalize after subtraction so adjacent large integers
+                    # cannot collapse to the same floating-point ratio. Exact
+                    # float conversion also preserves mixed int/float inputs.
+                    deltas[key] = float(abs(Fraction(a) - Fraction(b)) / Fraction(scale))
+                else:
+                    # Preserve the established floating-only receipt values.
+                    deltas[key] = abs(a / scale - b / scale)
             worst = max(deltas, key=deltas.get)
             report["lanes"].append({"lane": lane,
                                     "verdict": "CONSISTENT" if deltas[worst] <= rel_tol else "DIVERGENT",
