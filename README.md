@@ -101,6 +101,16 @@ JSON with sorted keys, compact separators, default ASCII escaping and no NaN.
 Do not relabel fixture inputs as a real benchmark. Source commits and input
 hashes support reproducibility; unsigned receipts do not prove signer identity.
 
+Machine identity fields, dataset/model revisions, and source repository names
+must be nonblank strings. Comparison contexts use canonical JSON equality,
+excluding the independent implementation's `source` record: Boolean, integer,
+and floating parameter values remain distinct, including inside nested values.
+Different contexts across harnesses are `INCOMPARABLE`; mixed contexts within a
+single chain are `INVALID`. JSON key ordering does not affect compatibility.
+Native adapter context and cutoff bindings preserve the same JSON type
+distinctions. The stdlib adapter binds the full native context, including source;
+source is excluded only when comparing independent implementations.
+
 ## Recorded native run
 
 `evidence/2026-09-05/crosscheck-native-scifact-20260905.json` records an actual

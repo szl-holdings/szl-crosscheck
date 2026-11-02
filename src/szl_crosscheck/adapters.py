@@ -29,12 +29,12 @@ def stdlib_retrieval(chain, context, metric_keys=("ndcg@10", "recall@10")):
             raise ValueError("tampered native stdlib receipt")
         previous = receipt["self_hash"]
     record = chain[-1].get("run", {})
-    if record.get("context") != context:
+    if canonical(record.get("context")) != canonical(context):
         raise ValueError("stdlib native receipt must bind the supplied context")
     result = record.get("result", {})
     if result.get("state") != "MEASURED" or result.get("lane") != "bm25":
         raise ValueError("adapter requires a measured BM25 result")
-    if result.get("k") != context["parameters"].get("top_k"):
+    if canonical(result.get("k")) != canonical(context["parameters"].get("top_k")):
         raise ValueError("stdlib cutoff differs from context")
     return seal({"harness": "stdlib-retrieval", "context": context,
                  "native_schema": "ReceiptChain.self_hash", "native_chain": chain,
@@ -61,7 +61,7 @@ def fastapi_retrieval(run, context, inputs, metric_keys=("ndcg@10", "recall@10")
     parameters = context["parameters"]
     model = f"bm25-k1={parameters['k1']}-b={parameters['b']}"
     if (run.get("model_revision") != model or run.get("model_revision") != context["model_revision"]
-            or run.get("config", {}).get("top_k") != parameters["top_k"]):
+            or canonical(run.get("config", {}).get("top_k")) != canonical(parameters["top_k"])):
         raise ValueError("native model/config differs from context")
     if run.get("result_hash") != _native_digest(run.get("metrics"), compact=False):
         raise ValueError("native result hash mismatch")
