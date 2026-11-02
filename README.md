@@ -62,6 +62,15 @@ Python 3.11+, standard library only. Never re-measures; verifies and compares
 what the harnesses already receipted. Numbers from different hardware remain
 incomparable by design.
 
+When either measurement is an integer, the comparator preserves its exact
+value through subtraction and relative normalization before rounding the
+reported delta to a float. Distinct counts above the float exact-integer range
+therefore remain distinguishable at zero tolerance, including mixed integer /
+float inputs. Existing floating-only calculations and recorded SciFact receipt
+bytes are unchanged. Tolerance decisions still use the reported floating delta;
+this is not an arbitrary-precision receipt format. Existing numeric admission
+and the small-value scale floor remain unchanged.
+
 ## Native BM25 adapters
 
 `szl_crosscheck.adapters.stdlib_retrieval(chain, context)` validates the native
