@@ -45,10 +45,14 @@ def validate_context(context):
     for key in ("machine", "dataset_revision", "model_revision", "parameters", "input_hashes", "source"):
         if key not in context or not context[key]:
             raise ValueError(f"missing context.{key}")
+    for key in ("dataset_revision", "model_revision"):
+        if not isinstance(context[key], str) or not context[key].strip():
+            raise ValueError(f"context.{key} must be a nonblank string")
     if not isinstance(context["machine"], dict) or not all(
-        context["machine"].get(k) for k in ("identity", "cpu", "os", "python")
+        isinstance(context["machine"].get(k), str) and context["machine"][k].strip()
+        for k in ("identity", "cpu", "os", "python")
     ):
-        raise ValueError("machine must bind identity, cpu, os, and python")
+        raise ValueError("machine must bind identity, cpu, os, and python as nonblank strings")
     if not isinstance(context["parameters"], dict):
         raise ValueError("parameters must be an object")
     hashes = context["input_hashes"]
@@ -58,7 +62,7 @@ def validate_context(context):
     ):
         raise ValueError("input_hashes must bind corpus, queries, and qrels")
     source = context["source"]
-    if not isinstance(source, dict) or not source.get("repository") or not (
+    if not isinstance(source, dict) or not isinstance(source.get("repository"), str) or not source["repository"].strip() or not (
         isinstance(source.get("commit"), str) and re.fullmatch(r"[0-9a-f]{40}", source["commit"])
     ):
         raise ValueError("source must name repository and full commit")
@@ -88,7 +92,7 @@ def _measurements(chain):
                        for k, v in metrics.items()):
                 raise ValueError("metrics must be finite numbers, not booleans or strings")
             lanes[lane] = metrics
-    if contexts and any(c != contexts[0] for c in contexts[1:]):
+    if contexts and any(canonical(c) != canonical(contexts[0]) for c in contexts[1:]):
         raise ValueError("mixed measurement contexts within a chain")
     return lanes, contexts[0] if contexts else None, sources
 
@@ -110,7 +114,7 @@ def crosscheck(chain_a, chain_b, rel_tol=0.01):
               "sources": {"a": sources_a, "b": sources_b}, "lanes": [],
               "honesty": "UNSIGNED_HONEST; integrity does not prove accuracy or identity"}
     shared = sorted(set(lanes_a) & set(lanes_b))
-    if context_a != context_b:
+    if canonical(context_a) != canonical(context_b):
         report.update(verdict="INCOMPARABLE", reason="machine, inputs, model, or parameters differ")
     elif not shared:
         report.update(verdict="INCOMPARABLE", reason="no shared MEASURED lanes")
