@@ -161,3 +161,5 @@ print(validated["verdict"], validated["verdict_reasons"])
 ## License
 
 Apache-2.0 — see LICENSE (same text as the org's other bench repos).
+
+Estate on Hugging Face: models, datasets and Spaces are published under the [SZLHOLDINGS](https://huggingface.co/SZLHOLDINGS) org.
