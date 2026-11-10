@@ -20,4 +20,4 @@ __all__ = [
     "validate_lean_build_receipt",
     "verify_chain",
 ]
-__version__ = "0.3.0"
+__version__ = "0.3.2"
