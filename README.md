@@ -71,6 +71,55 @@ bytes are unchanged. Tolerance decisions still use the reported floating delta;
 this is not an arbitrary-precision receipt format. Existing numeric admission
 and the small-value scale floor remain unchanged.
 
+## Frozen full-population comparisons
+
+The default API intentionally compares shared measured lanes and metric keys.
+It cannot establish that omitted measurements were checked. Existing v2 report
+bytes, historical evidence and the default behavior remain unchanged.
+
+For an exact eligible population frozen **before** obtaining the two result sets,
+supply the new keyword-only `required_metrics` argument:
+
+```python
+report = crosscheck(chain_a, chain_b, rel_tol=0.01, required_metrics={
+    "bm25": ["ndcg@10", "recall@10"],
+})
+```
+
+This opt-in returns `szl.crosscheck.v3`, with an integrity-bound
+`szl.crosscheck-population/v1` record. Both sides must contain exactly the frozen
+case-sensitive `(lane, metric)` identities as **MEASURED** entries. Counts alone
+are insufficient. Missing and unexpected identities are listed separately for
+each side; the full non-compared producer records remain in the input chains.
+An explicit empty policy is `INCOMPARABLE`, not vacuous success. A nonempty lane
+needs a nonempty unique list of metric names. Policy limits are 256 lanes, 4096
+lane/metric pairs and 256 characters per trimmed name; malformed policy is
+`INVALID`. These are implementation bounds, not a scientific sufficiency rule.
+
+`population.complete` states only exact measured-identity coverage.
+`population.comparison_complete` additionally requires compatible recorded
+contexts and comparison of every expected pair. Removing a required measurement
+from either side therefore cannot yield full-population `CONSISTENT` even when
+the remaining shared subset agrees. A discrepancy in a present required metric
+remains `DIVERGENT` while incomplete coverage stays explicit. An unexpected,
+unrequested metric is reported as a population mismatch, not used to invent a
+divergence among requested measurements. Signature/chain failures remain
+`INVALID`; incomparable contexts never become complete comparisons.
+
+The normalized expectation, its SHA-256, coverage observations and verdict are
+all committed into the existing dual-report digest. Ordering the same metric
+list differently does not change policy identity. This does **not** prove the
+caller preregistered the population: policy and producer context remain
+caller-declared, hashes are not signatures, and equal comparisons do not prove
+accuracy, source independence or trusted execution. In v3,
+`execution_authorized` is always false. Do not derive the required set from the
+intersection being tested or pool v2 shared-only and v3 full-population claims.
+
+The existing native BM25 adapters feed this mode without a new receipt format
+or publisher. Source tests exercise all 256 pairs of subsets of a four-measurement
+fixture against an independent test-owned set-equality oracle. That is one
+exhaustive synthetic test family, not 256 independent real experiments.
+
 ## Native BM25 adapters
 
 `szl_crosscheck.adapters.stdlib_retrieval(chain, context)` validates the native
