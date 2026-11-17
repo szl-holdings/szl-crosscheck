@@ -97,9 +97,56 @@ def _measurements(chain):
     return lanes, contexts[0] if contexts else None, sources
 
 
-def crosscheck(chain_a, chain_b, rel_tol=0.01):
+def _required_population(value):
+    """Normalize explicit caller policy; never infer it from observed results."""
+    if type(value) is not dict or len(value) > 256:
+        raise ValueError("required_metrics must be an object with at most 256 lanes")
+    normalized = {}
+    cells = 0
+    for lane, keys in value.items():
+        if (type(lane) is not str or not lane.strip() or lane != lane.strip()
+                or len(lane) > 256 or type(keys) is not list or not keys):
+            raise ValueError("population lanes need nonblank names and nonempty metric arrays")
+        if any(type(key) is not str or not key.strip() or key != key.strip()
+               or len(key) > 256 for key in keys):
+            raise ValueError("population metrics need nonblank names")
+        if len(keys) != len(set(keys)):
+            raise ValueError("duplicate required metric identity")
+        cells += len(keys)
+        if cells > 4096:
+            raise ValueError("required population exceeds 4096 lane/metric identities")
+        normalized[lane] = sorted(keys)
+    return dict(sorted(normalized.items()))
+
+
+def _population_observation(required, lanes_a, lanes_b):
+    expected = {(lane, key) for lane, keys in required.items() for key in keys}
+
+    def observe(lanes):
+        found = {(lane, key) for lane, keys in lanes.items() for key in keys}
+        pairs = lambda values: [list(pair) for pair in sorted(values)]
+        return {"observed_count": len(found), "matched_count": len(expected & found),
+                "missing": pairs(expected - found), "unexpected": pairs(found - expected),
+                "exact_population": bool(expected) and found == expected}
+
+    a, b = observe(lanes_a), observe(lanes_b)
+    policy = {"schema": "szl.crosscheck-population/v1", "required_metrics": required}
+    return {**policy, "policy_sha256": hashlib.sha256(canonical(policy).encode()).hexdigest(),
+            "expected_count": len(expected), "a": a, "b": b,
+            "complete": a["exact_population"] and b["exact_population"],
+            "comparison_complete": False,
+            "assurance": "CALLER_DECLARED_POLICY_NOT_INDEPENDENT_ATTESTATION"}
+
+
+def crosscheck(chain_a, chain_b, rel_tol=0.01, *, required_metrics=None):
     if type(rel_tol) not in (int, float) or not math.isfinite(rel_tol) or rel_tol < 0:
         return {"verdict": "INVALID", "reason": "tolerance must be finite and nonnegative"}
+    required = None
+    if required_metrics is not None:
+        try:
+            required = _required_population(required_metrics)
+        except ValueError as error:
+            return {"verdict": "INVALID", "reason": str(error)}
     for name, chain in (("A", chain_a), ("B", chain_b)):
         valid, detail = verify_chain(chain)
         if not valid:
@@ -109,11 +156,17 @@ def crosscheck(chain_a, chain_b, rel_tol=0.01):
         lanes_b, context_b, sources_b = _measurements(chain_b)
     except (ValueError, TypeError, OverflowError) as error:
         return {"verdict": "INVALID", "reason": str(error)}
-    report = {"schema": "szl.crosscheck.v2", "tolerance": rel_tol,
+    report = {"schema": "szl.crosscheck.v2" if required is None else "szl.crosscheck.v3",
+              "tolerance": rel_tol,
               "a_terminal": chain_a[-1]["chain_hash"], "b_terminal": chain_b[-1]["chain_hash"],
               "sources": {"a": sources_a, "b": sources_b}, "lanes": [],
               "honesty": "UNSIGNED_HONEST; integrity does not prove accuracy or identity"}
+    if required is not None:
+        report["population"] = _population_observation(required, lanes_a, lanes_b)
+        report["execution_authorized"] = False
     shared = sorted(set(lanes_a) & set(lanes_b))
+    if required is not None:
+        shared = [lane for lane in shared if lane in required]
     if canonical(context_a) != canonical(context_b):
         report.update(verdict="INCOMPARABLE", reason="machine, inputs, model, or parameters differ")
     elif not shared:
@@ -121,6 +174,8 @@ def crosscheck(chain_a, chain_b, rel_tol=0.01):
     else:
         for lane in shared:
             common = sorted(set(lanes_a[lane]) & set(lanes_b[lane]))
+            if required is not None:
+                common = [key for key in common if key in required[lane]]
             if not common:
                 report["lanes"].append({"lane": lane, "verdict": "INCOMPARABLE",
                                         "reason": "no shared metric keys"})
@@ -145,5 +200,17 @@ def crosscheck(chain_a, chain_b, rel_tol=0.01):
         verdicts = {row["verdict"] for row in report["lanes"]}
         report["verdict"] = ("DIVERGENT" if "DIVERGENT" in verdicts else
                              "INCOMPARABLE" if "INCOMPARABLE" in verdicts else "CONSISTENT")
+    if required is not None:
+        population = report["population"]
+        compared = sum(row.get("metrics_compared", 0) for row in report["lanes"])
+        population["comparison_complete"] = bool(
+            population["complete"] and compared == population["expected_count"]
+            and canonical(context_a) == canonical(context_b)
+        )
+        # Keep a witnessed discrepancy visible, but an incomplete agreeing subset
+        # can never become a complete-population CONSISTENT verdict.
+        if report["verdict"] == "CONSISTENT" and not population["comparison_complete"]:
+            report.update(verdict="INCOMPARABLE",
+                          reason="frozen measurement population is incomplete or contains unexpected identities")
     report["dual_receipt"] = hashlib.sha256(canonical(report).encode()).hexdigest()
     return report
