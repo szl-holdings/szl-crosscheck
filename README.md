@@ -120,6 +120,28 @@ or publisher. Source tests exercise all 256 pairs of subsets of a four-measureme
 fixture against an independent test-owned set-equality oracle. That is one
 exhaustive synthetic test family, not 256 independent real experiments.
 
+## Experimental paired agent-harness evolution review (source-only)
+
+`szl_crosscheck.harness_evolution.review_harness_pair(evidence)` is an **opt-in**
+stdlib-only arithmetic gate for Kimi and other existing source-owned harness
+improvement proposals. It consumes exactly paired baseline/candidate outcomes
+with declared immutable model/harness/evaluator/task revisions, distinct
+proposer/evaluator identity digests, a frozen policy, token/tool limits, at
+least 30 heldout task pairs and five prior-capability regression cases.
+
+It rejects missing or duplicate case IDs, non-boolean outcomes, budget
+overruns, newly failed prior tasks, insufficient paired net gains, and
+non-significant one-sided exact paired discordance tests adjusted for the
+declared number of attempted candidate patches.
+
+Even its positive `SOURCE_CANDIDATE_FOR_OWNER_REVIEW` result is **never**
+signature verification, source provenance, heldout validity, runtime health,
+training completion or deploy authorization. All authorization flags are
+always false; it only checks claimed input arithmetic. See
+[the source and ownership contract](docs/KIMI_HARNESS_EVOLUTION_REVIEW.md)
+and synthetic `tests/test_harness_evolution.py`. No additional Kimi process,
+secret access, mutable evaluator or scheduled watcher is introduced.
+
 ## Native BM25 adapters
 
 `szl_crosscheck.adapters.stdlib_retrieval(chain, context)` validates the native
