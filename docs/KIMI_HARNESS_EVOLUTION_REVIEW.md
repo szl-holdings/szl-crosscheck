@@ -46,7 +46,7 @@ A `SOURCE_CANDIDATE_FOR_OWNER_REVIEW` decision is **never approval**, even if th
 2. baseline and candidate are declared to use the same model, suite and evaluator but different harness revisions;
 3. all required task IDs are unique and the minimum heldout/regression coverage is present;
 4. no previously passing regression case becomes a failure;
-5. all per-case token/tool ceilings and the declared aggregate token ratio are met;
+5. all per-case token/tool ceilings and the declared **per-stratum** token ratios (heldout and prior-regression separately) are met, so cheap regression probes cannot subsidize expensive heldout runs;
 6. heldout net wins meet the preregistered minimum; and
 7. an **exact, one-sided paired discordance sign test** meets a Bonferroni-style candidate-family cap.
 
