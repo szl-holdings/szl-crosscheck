@@ -172,12 +172,18 @@ def review_harness_pair(evidence: object) -> dict:
         for row in regressions
     ):
         return _hold("PRIOR_CAPABILITY_REGRESSION", regression_cases=len(regressions))
+    # A single combined budget can be gamed by spending too much on heldout
+    # tasks and compensating with near-zero work on prior-capability probes.
+    # Compare each frozen stratum separately; never shift cost between them.
+    for label, stratum in (("heldout", heldout), ("regression", regressions)):
+        baseline_cost = sum(row["baseline_tokens"] for row in stratum)
+        candidate_cost = sum(row["candidate_tokens"] for row in stratum)
+        if candidate_cost * 10000 > (
+            baseline_cost * plan["max_token_ratio_basis_points"]
+        ):
+            return _hold("TOKEN_COST_REGRESSION", split=label)
     base_tokens = sum(row["baseline_tokens"] for row in rows)
     candidate_tokens = sum(row["candidate_tokens"] for row in rows)
-    if candidate_tokens * 10000 > (
-        base_tokens * plan["max_token_ratio_basis_points"]
-    ):
-        return _hold("TOKEN_COST_REGRESSION")
 
     wins = sum(not row["baseline_pass"] and row["candidate_pass"] for row in heldout)
     losses = sum(row["baseline_pass"] and not row["candidate_pass"] for row in heldout)
