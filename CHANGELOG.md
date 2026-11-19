@@ -1,6 +1,16 @@
 # Changelog
 
+## 0.4.0 (unreleased)
+
+### Added
+
+- source_binding: content-addressed cryptographic binding receipts for the evidence graph. Binds a claim, the exact source bytes it was grounded in, and an optional measured outcome into one receipt with deterministic hashing, optional owner-keyed HMAC signing, and fail-closed verification with explicit reason codes.
+- Merkle bundles (szl.source-binding-bundle/v1): ordered per-item bindings for a benchmark run collapse into one verifiable root; drift in any single receipt or the run label is detectable offline with no network access.
+
+Honest scope: digests prove which bytes were seen at bind time and that receipts have not drifted since; they do not prove sources are truthful, URLs still resolve, or that an outcome was honest before it was bound. Keys are owner-supplied at runtime and never stored in receipts.
+
 ## 0.3.2 (unreleased)
+
 
 ### Fixed
 
