@@ -132,7 +132,9 @@ least 30 heldout task pairs and five prior-capability regression cases.
 It rejects missing or duplicate case IDs, non-boolean outcomes, budget
 overruns, newly failed prior tasks, insufficient paired net gains, and
 non-significant one-sided exact paired discordance tests adjusted for the
-declared number of attempted candidate patches.
+declared number of attempted candidate patches. Token ratio budgets apply
+**separately** to heldout and prior-regression groups; cheap regression tests
+cannot hide an expensive heldout candidate.
 
 Even its positive `SOURCE_CANDIDATE_FOR_OWNER_REVIEW` result is **never**
 signature verification, source provenance, heldout validity, runtime health,
