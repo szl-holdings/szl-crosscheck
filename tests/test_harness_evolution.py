@@ -157,6 +157,22 @@ def test_total_token_cost_regression_is_hold():
     assert review_harness_pair(v)["reason"] == "TOKEN_COST_REGRESSION"
 
 
+def test_cost_shifting_between_heldout_and_regression_is_hold():
+    v = record()
+    for row in v["pairs"]:
+        if row["split"] == "heldout":
+            row["candidate_tokens"] = 110
+        else:
+            row["candidate_tokens"] = 1
+    # Combined candidate tokens are lower, but heldout cost is higher.
+    assert sum(r["candidate_tokens"] for r in v["pairs"]) < sum(
+        r["baseline_tokens"] for r in v["pairs"]
+    )
+    result = review_harness_pair(v)
+    assert result["reason"] == "TOKEN_COST_REGRESSION"
+    assert result["split"] == "heldout"
+
+
 def test_no_measured_gain_is_hold_even_if_cost_reduces():
     v = record()
     for row in v["pairs"][:16]:
