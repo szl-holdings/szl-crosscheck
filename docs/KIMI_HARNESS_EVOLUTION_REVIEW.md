@@ -54,6 +54,23 @@ The arithmetic uses: `w = count(B_i=0,C_i=1)`, `l=count(B_i=1,C_i=0)`, `p = sum(
 
 All outputs explicitly set `trusted_evaluator_proven=false`, `plan_preregistration_proven=false`, `model_quality_proven=false`, `promotion_authorized=false`, `runtime_change_authorized=false`. Inputs may be fabricated; the module **does not certify their provenance or correctness**.
 
+## SZL-native formula and proof-status mapping (design, not executed here)
+
+The authoritative [SZL math-to-runtime matrix](https://github.com/szl-holdings/szl-papers/blob/main/MATH_RUNTIME_EXECUTION_MATRIX.md) defines exactly eight **locked-registry formula IDs**, `F1/F4/F7/F11/F12/F18/F19/F22`. Its separate `lutar-lean` proof snapshot and per-declaration `#print axioms` readback remain the proof authority; this Python module does **not** import Lean, replay those theorems, create proof terms, or assert refinement to any formula. Proposed wiring is:
+
+| Formula and source-established property | This gate's present capability | Still required from existing owner |
+| --- | --- | --- |
+| F1 receipt replay and binding | source-only typed case+policy checks | `szl-receipt` verifies digest, actual byte identity and signer |
+| F4 DAG acyclicity | **not implemented** | Forge validates propose→evaluate→review→release control DAG |
+| F7 FIFO/sequence ordering | **not implemented** | independent receipt-chain sequence and tracing |
+| F11 ledger conservation | exact count of represented heldout/regression cases, **not** a conservation theorem witness | independent complete task-population accounting with all attempted candidates |
+| F12 bounded coupling | candidate tool/token ratio and per-case budget checks, **not** the formal F12 bound | pinned bound parameters and external policy witness |
+| F18 Reed–Solomon/recovery | **not implemented** | authorized checkpoint/restore evidence from training owner |
+| F19 entropy-budget accounting | tokens counted, **no joules or entropy measured** | `szl-energy-attest` measured or `UNAVAILABLE` energy receipt |
+| F22 append-only monotonicity | **not implemented** | append-only hash-chain/rollback-pointer verification |
+
+The unconditional Λ uniqueness conjecture is **disproved as stated**; conditional Theorem U is distinct and **cannot authorize** an agent action. Formula maturity and the number of checked axioms are not changed by the newly added harness module. This mapping is a falsifiable implementation roadmap, not production integration.
+
 ## Exact SZL evidence and ownership path
 
 | Stage | Existing owner / authority | Exit evidence |
