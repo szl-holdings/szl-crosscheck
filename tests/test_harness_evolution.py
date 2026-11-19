@@ -178,6 +178,8 @@ def test_single_success_cannot_satisfy_multiplicity_corrected_evidence():
 def test_many_patch_trials_cannot_reuse_weak_single_test():
     v = record()
     v["plan"]["candidate_family_size"] = 128
+    for row in v["pairs"][9:16]:
+        row["candidate_pass"] = False
     assert (
         review_harness_pair(v)["reason"]
         == "MULTIPLICITY_ADJUSTED_SIGN_TEST_NOT_MET"
