@@ -10,6 +10,14 @@
 - NVIDIA, [Megatron Bridge checkpointing](https://docs.nvidia.com/nemo/megatron-bridge/latest/training/checkpointing.html): full training resume requires optimizer/RNG/dataloader state, unlike model-weight initialization; this **module does not verify training/checkpoint recovery**.
 - [vLLM security](https://docs.vllm.ai/en/latest/usage/security/): `cache_salt` is *not* tenant isolation; request-scoped invariant keys and a shared process alone cannot prove SZL Second Brain multi-tenancy. This is a separate deployment test.
 
+### Global research cross-check: China, Korea and Ireland
+
+- **China — DeepSeek-R1 / GRPO:** the [peer-reviewed DeepSeek-R1 methods](https://doi.org/10.1038/s41586-025-09422-z) compute standardized *within-prompt group* advantages using sampled responses and a verifiable reward signal. That is a potential **separate weight-training experiment**, not evidence that changing the agent harness improves correctness. SZL's future GRPO lane should distinguish reward-hacking and verifier independence from this unchanged-weight harness study; no GPU job, reward function or hyperparameter is approved by this PR.
+- **South Korea — KAIST KORMo:** [the open KORMo project](https://kaist-mlplab.github.io/kormo/) publishes data sources, filtering, code, training recipes, model checkpoints and logs alongside a Korean-English bilingual model. The transferable method is **complete reproducibility bundles and independent language-domain heldouts**, not importing their datasets into private Khipu or claiming an unmeasured multilingual gain.
+- **Ireland — Lero/University of Limerick AIware Lab:** [the lab's research](https://aiware-lero.github.io/) focuses on software-testing automation, runtime monitoring and adversarial evaluation under industrial constraints. SZL should stress-test harness changes on prior failures and blind external tasks, including negative rights/tenant/evaluator-tampering cases, rather than treating a positive benchmark as deployment readiness.
+
+These are proposals for independent owner-approved future studies; the source module only implements the bounded arithmetic below.
+
 These are **engineering comparisons**, not allegations that authors' experiments are directly replicable on SZL's GPU fleet. The only code added in this PR is original, Python-standard-library arithmetic and synthetic tests.
 
 ## A single bounded Kimi experiment (the proposed collaboration)
