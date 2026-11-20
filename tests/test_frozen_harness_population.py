@@ -130,3 +130,14 @@ def test_input_is_unchanged_even_on_mismatch():
     before = deepcopy((evidence, policy))
     review_frozen_harness_pair(evidence, policy)
     assert (evidence, policy) == before
+
+
+def test_caller_claimed_baseline_verdict_cannot_bypass_fresh_review():
+    """The wrapper recomputes source arithmetic; it never trusts an injected verdict."""
+    evidence = record()
+    policy = policy_for(evidence)
+    evidence["baseline_verdict"] = "SOURCE_CANDIDATE_FOR_OWNER_REVIEW"
+    result = review_frozen_harness_pair(evidence, policy)
+    assert result["verdict"] == "HOLD"
+    assert result["reason"] == "ROOT_SCHEMA_INVALID"
+    assert result["promotion_authorized"] is False
