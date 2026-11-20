@@ -47,7 +47,8 @@ BINDINGS = {
 PLAN_KEYS = {
     "schema", "profile", "source_revision", "proposer_digest",
     "expected_artifacts", "bindings", "minimum_correct_cases",
-    "minimum_evaluation_cases", "required_qualification_checks",
+    "minimum_evaluation_cases", "minimum_accuracy_basis_points",
+    "required_qualification_checks",
     "maximum_runtime_age_seconds",
 }
 NODE_KEYS = {
@@ -56,6 +57,7 @@ NODE_KEYS = {
     "state", "access_status", "claims",
 }
 RUNTIME_STAGES = {"provider", "serving"}
+NETWORK_STAGES = {"provider", "serving", "publication"}
 ACCESS_STOP = {401, 403, 429}
 
 
@@ -207,6 +209,9 @@ def _extra(stage: str, values: object, plan: dict) -> str | None:
             or not _count(values["correct"])
             or values["correct"] > values["attempted"]
             or values["correct"] < plan["minimum_correct_cases"]
+            or values["correct"] * 10000 < (
+                values["attempted"] * plan["minimum_accuracy_basis_points"]
+            )
             or type(values["failed_negative_controls"]) is not int
             or values["failed_negative_controls"] != 0
             or values["heldout_frozen"] is not True
@@ -258,15 +263,21 @@ def review_release_graph(*, plan: object, nodes: object, now_utc: str) -> dict:
         or not _count(plan["maximum_runtime_age_seconds"], minimum=30, maximum=3600)
         or not _count(plan["minimum_evaluation_cases"], minimum=0, maximum=100000)
         or not _count(plan["minimum_correct_cases"], minimum=0, maximum=100000)
+        or not _count(plan["minimum_accuracy_basis_points"], minimum=0, maximum=10000)
     ):
         return _hold("POLICY_LIMITS_INVALID")
     if profile == "served_model":
         if (
             plan["minimum_evaluation_cases"] < 1
+            or plan["minimum_accuracy_basis_points"] < 1
             or plan["minimum_correct_cases"] > plan["minimum_evaluation_cases"]
         ):
             return _hold("HELDOUT_POLICY_INVALID")
-    elif plan["minimum_evaluation_cases"] != 0 or plan["minimum_correct_cases"] != 0:
+    elif (
+        plan["minimum_evaluation_cases"] != 0
+        or plan["minimum_correct_cases"] != 0
+        or plan["minimum_accuracy_basis_points"] != 0
+    ):
         return _hold("UNSCOPED_EVALUATION_POLICY")
 
     expected = plan["expected_artifacts"]
@@ -304,8 +315,10 @@ def review_release_graph(*, plan: object, nodes: object, now_utc: str) -> dict:
         code = node["access_status"]
         if type(code) is int and code in ACCESS_STOP:
             return _hold("ACCESS_DENIAL_OR_RATE_LIMIT_STOP", stage=stage)
-        if code is not None and (type(code) is not int or code != 200):
+        if stage in NETWORK_STAGES and (type(code) is not int or code != 200):
             return _hold("PROVIDER_READBACK_NOT_SUCCESS", stage=stage)
+        if stage not in NETWORK_STAGES and code is not None:
+            return _hold("OFFLINE_STAGE_ACCESS_STATUS_INVALID", stage=stage)
         if node["state"] != "PASS" or type(node["state"]) is not str:
             return _hold("STAGE_NOT_PROVED", stage=stage)
         if (
