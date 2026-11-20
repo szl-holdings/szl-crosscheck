@@ -35,6 +35,7 @@ def fixture(profile="served_model"):
         "expected_artifacts": artifacts,
         "bindings": bindings,
         "minimum_correct_cases": 80 if profile == "served_model" else 0,
+        "minimum_accuracy_basis_points": 8000 if profile == "served_model" else 0,
         "minimum_evaluation_cases": 100 if profile == "served_model" else 0,
         "required_qualification_checks": 5,
         "maximum_runtime_age_seconds": 300,
@@ -172,6 +173,21 @@ def test_auth_denial_and_rate_limit_are_stop_not_retry():
         result = assess(plan, nodes)
         assert result["reason"] == "ACCESS_DENIAL_OR_RATE_LIMIT_STOP"
         assert result["stage"] == "provider"
+
+
+def test_network_stages_must_have_authenticated_readback_status():
+    for stage in ("provider", "serving", "publication"):
+        plan, nodes = fixture()
+        node_at(nodes, stage)["access_status"] = None
+        result = assess(plan, nodes)
+        assert result["reason"] == "PROVIDER_READBACK_NOT_SUCCESS"
+        assert result["stage"] == stage
+
+
+def test_offline_stage_cannot_manufacture_http_access_witness():
+    plan, nodes = fixture()
+    node_at(nodes, "source")["access_status"] = 200
+    assert assess(plan, nodes)["reason"] == "OFFLINE_STAGE_ACCESS_STATUS_INVALID"
 
 
 def test_http_success_not_a_substitute_for_runtime_evidence():
@@ -329,6 +345,21 @@ def test_failed_quality_floor_is_hold():
     plan, nodes = fixture()
     node_at(nodes, "evaluation")["claims"]["correct"] = 70
     assert assess(plan, nodes)["reason"] == "HELDOUT_QUALITY_UNVERIFIED"
+
+
+def test_absolute_correct_count_cannot_hide_low_accuracy_denominator():
+    plan, nodes = fixture()
+    row = node_at(nodes, "evaluation")["claims"]
+    row["attempted"] = 200
+    row["correct"] = 80
+    # An absolute count would falsely pass 80 correct responses out of 200.
+    assert assess(plan, nodes)["reason"] == "HELDOUT_QUALITY_UNVERIFIED"
+
+
+def test_accuracy_basis_points_boolean_is_invalid():
+    plan, nodes = fixture()
+    plan["minimum_accuracy_basis_points"] = True
+    assert assess(plan, nodes)["reason"] == "POLICY_LIMITS_INVALID"
 
 
 def test_evaluation_attempt_count_not_vacuous():
