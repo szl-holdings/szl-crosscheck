@@ -153,7 +153,8 @@ separate required populations: `edge_service` (six stages) and `served_model`
 (nine stages). Missing stages, mismatched source/image hashes, skipped mandatory
 CI, incomplete provider instance identity, stale runtime observations,
 unverified optimizer state, backup drift, failed negative evaluation controls,
-and missing serving/rights evidence produce `HOLD`.
+and missing serving/rights evidence, unsafe replay after uncertain inference
+dispatch, or unbound request-to-receipt identity produce `HOLD`.
 
 The strongest outcome is `SOURCE_CLAIM_GRAPH_FOR_OWNER_REVIEW` and **never**
 `production_qualified`, `deployment_authorized` or actual signature
