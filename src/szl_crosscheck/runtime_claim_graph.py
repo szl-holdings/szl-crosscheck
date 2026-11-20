@@ -115,7 +115,12 @@ def _extra(stage: str, values: object, plan: dict) -> str | None:
     if type(values) is not dict:
         return "STAGE_CLAIMS_INVALID"
     if stage == "source":
-        return None if values == {"protected_reviewed_source": True} else "SOURCE_REVIEW_UNVERIFIED"
+        return (
+            None
+            if set(values) == {"protected_reviewed_source"}
+            and values["protected_reviewed_source"] is True
+            else "SOURCE_REVIEW_UNVERIFIED"
+        )
     if stage == "ci":
         if set(values) != {"passed", "required", "qualification_skips"}:
             return "CI_COUNTS_UNOBSERVED"
@@ -185,10 +190,12 @@ def _extra(stage: str, values: object, plan: dict) -> str | None:
             return "RESUMABLE_CHECKPOINT_UNVERIFIED"
         return None
     if stage == "backup":
-        return None if values == {
-            "independent_storage_readback": True,
-            "matching_checkpoint_bytes": True,
-        } else "INDEPENDENT_BACKUP_UNVERIFIED"
+        required = {"independent_storage_readback", "matching_checkpoint_bytes"}
+        return (
+            None
+            if set(values) == required and all(values[k] is True for k in required)
+            else "INDEPENDENT_BACKUP_UNVERIFIED"
+        )
     if stage == "evaluation":
         if set(values) != {
             "attempted", "correct", "failed_negative_controls",
