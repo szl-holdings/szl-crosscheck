@@ -208,8 +208,18 @@ def _extra(stage: str, values: object, plan: dict) -> str | None:
             return "HELDOUT_QUALITY_UNVERIFIED"
         return None
     if stage == "serving":
-        keys = {"authenticated_probe", "source_revision_readback", "tenant_boundary_negative_test"}
-        return None if set(values) == keys and all(values[k] is True for k in keys) else "SERVING_SECURITY_OR_SOURCE_UNVERIFIED"
+        keys = {
+            "authenticated_probe",
+            "source_revision_readback",
+            "tenant_boundary_negative_test",
+            "uncertain_dispatch_replay_negative_test",
+            "exact_request_receipt_binding",
+        }
+        return (
+            None
+            if set(values) == keys and all(values[k] is True for k in keys)
+            else "SERVING_SECURITY_OR_SOURCE_UNVERIFIED"
+        )
     if stage == "publication":
         keys = {"bytes_read_back", "rights_reviewed", "claim_denominators_present"}
         return None if set(values) == keys and all(values[k] is True for k in keys) else "PUBLICATION_CLAIMS_UNVERIFIED"
