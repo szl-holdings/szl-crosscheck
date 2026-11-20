@@ -81,6 +81,8 @@ def fixture(profile="served_model"):
             "authenticated_probe": True,
             "source_revision_readback": True,
             "tenant_boundary_negative_test": True,
+            "uncertain_dispatch_replay_negative_test": True,
+            "exact_request_receipt_binding": True,
         },
         "publication": {
             "bytes_read_back": True,
@@ -326,6 +328,20 @@ def test_evaluation_attempt_count_not_vacuous():
 def test_serving_tenant_negative_control_is_mandatory():
     plan, nodes = fixture()
     node_at(nodes, "serving")["claims"]["tenant_boundary_negative_test"] = False
+    assert assess(plan, nodes)["reason"] == "SERVING_SECURITY_OR_SOURCE_UNVERIFIED"
+
+
+def test_uncertain_dispatch_must_not_replay_paid_or_mutating_request():
+    plan, nodes = fixture()
+    serving = node_at(nodes, "serving")["claims"]
+    serving["uncertain_dispatch_replay_negative_test"] = False
+    assert assess(plan, nodes)["reason"] == "SERVING_SECURITY_OR_SOURCE_UNVERIFIED"
+
+
+def test_request_to_receipt_binding_required_even_with_healthy_http():
+    plan, nodes = fixture("edge_service")
+    serving = node_at(nodes, "serving")["claims"]
+    serving["exact_request_receipt_binding"] = False
     assert assess(plan, nodes)["reason"] == "SERVING_SECURITY_OR_SOURCE_UNVERIFIED"
 
 
