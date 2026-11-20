@@ -80,10 +80,18 @@ immutable bindings. A stage must declare a consistent SHA-256 artifact,
 source revision and expected predecessor fingerprints. Runtime readbacks have a
 5-minute default in the synthetic fixture; the caller can choose 30–3600 seconds
 for a documented operating cadence. HTTP 401/403/429 results cause an explicit
-stop, not fallback credentials or endpoint hopping. The provider list requires
+stop, not fallback credentials or endpoint hopping. Provider, serving and
+publication stages also require an explicit reported HTTP 200, while an
+HTTP code on offline-only stages is treated as a schema error. An unverified
+HTTP 200 is still only a caller claim. The provider list requires
 distinct instance identities, exact image digests, stable desired/running counts
 and zero pending changes. Failed evaluation controls, missing heldout cases,
 missing backup or unsafely skipped CI qualification gates cause `HOLD`.
+The evaluator must meet **both** a minimum correct-case count and a
+preregistered accuracy basis-point threshold over **all attempted cases**:
+`correct * 10000 >= attempted * minimum_accuracy_basis_points`.
+The source validator recomputes this integer inequality; it cannot establish
+that the attempted denominator or heldout cases are genuine.
 
 The stage claims are **not** proof of actual external verification. The graph
 cannot query Salad, verify OCI/Cosign signatures, test model weights, inspect
