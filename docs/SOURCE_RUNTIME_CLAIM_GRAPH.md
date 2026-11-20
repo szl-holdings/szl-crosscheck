@@ -114,8 +114,15 @@ successful classification is `SOURCE_CLAIM_GRAPH_FOR_OWNER_REVIEW` with
    heldout criteria, complete attempted-task denominator, negative controls,
    independent evaluator, baselines, uncertainty and observed quality.
 6. **Serving/publication:** authenticated route, negative security/tenant
-   test, source image/model revision readback, authorized claim/rights
-   review and final public card/endpoint byte readback. PyPI, Cloudflare,
+   test, **no automatic replay of uncertain non-idempotent requests**, exact
+   request→producer→receipt binding, source image/model revision readback,
+   authorized claim/rights review and final public card/endpoint byte
+   readback. In particular, [szl-router #153](https://github.com/szl-holdings/szl-router/pull/153)
+   is a real **Kimi + Mistral reviewed source candidate**, whose protected
+   source checks passed, for stopping replay after a POST may have reached a
+   worker. It remains separate from observed Cloudflare settlement, paid
+   inference, and a deployed route. A changed source response label is not
+   proof a particular request executed exactly once. PyPI, Cloudflare,
    Neon, Hugging Face and billing each have their own separate publisher
    and production gates; none can be proven by this source module.
 
