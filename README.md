@@ -144,6 +144,28 @@ always false; it only checks claimed input arithmetic. See
 and synthetic `tests/test_harness_evolution.py`. No additional Kimi process,
 secret access, mutable evaluator or scheduled watcher is introduced.
 
+## Source-to-runtime release claim graph (non-authorizing)
+
+`szl_crosscheck.runtime_claim_graph.review_release_graph` compares a bounded,
+acyclic set of caller-declared GitHub source, CI, image, provider, training,
+backup, evaluation, serving and publication fingerprints. It includes two
+separate required populations: `edge_service` (six stages) and `served_model`
+(nine stages). Missing stages, mismatched source/image hashes, skipped mandatory
+CI, incomplete provider instance identity, stale runtime observations,
+unverified optimizer state, backup drift, failed negative evaluation controls,
+and missing serving/rights evidence, unsafe replay after uncertain inference
+dispatch, or unbound request-to-receipt identity produce `HOLD`.
+
+The strongest outcome is `SOURCE_CLAIM_GRAPH_FOR_OWNER_REVIEW` and **never**
+`production_qualified`, `deployment_authorized` or actual signature
+verification. All upstream verifier and byte-matching facts are **untrusted
+claims** until independent provider/signer/evaluator owners read back and
+authenticate the real source, artifact and runtime. See
+[the source-to-runtime and global prior-art contract](docs/SOURCE_RUNTIME_CLAIM_GRAPH.md)
+and the opt-in synthetic tests in `tests/test_runtime_claim_graph.py`.
+This module performs no cloud calls, signer checks, model execution,
+publications or scheduler actions and does not change `crosscheck()`.
+
 ## Native BM25 adapters
 
 `szl_crosscheck.adapters.stdlib_retrieval(chain, context)` validates the native
