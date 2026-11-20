@@ -166,6 +166,24 @@ and the opt-in synthetic tests in `tests/test_runtime_claim_graph.py`.
 This module performs no cloud calls, signer checks, model execution,
 publications or scheduler actions and does not change `crosscheck()`.
 
+## Experimental dream next-cycle comparison — explicit predicates only
+
+`szl_crosscheck.dream_predicate.review_next_cycle()` provides a
+**source-only, non-authorizing** check for measurable next-cycle dream
+hypotheses. A natural-language statement such as "target 80% GPU
+utilization" **cannot** turn 0% utilization into `PASS` without an
+explicit, previously frozen operator (`ge`, `le`, etc.), metric,
+unit, threshold, cycle binding, timestamp and independent evaluator
+claim. The code never tries to infer a comparison direction from words.
+
+Results are labeled `DECLARED_PREDICATE_MET_UNATTESTED`,
+`DECLARED_PREDICATE_NOT_MET_UNATTESTED` or `HOLD`, **never production
+qualification**. Caller-provided hashes, timestamps, telemetry and
+evaluator identities remain unauthenticated. No new auditor, GPU job,
+agent workflow or workstation setting is created. See
+[the legacy false-positive and adoption contract](docs/DREAM_CHECK_SEMANTICS.md)
+and synthetic `tests/test_dream_predicate.py`.
+
 ## Native BM25 adapters
 
 `szl_crosscheck.adapters.stdlib_retrieval(chain, context)` validates the native
