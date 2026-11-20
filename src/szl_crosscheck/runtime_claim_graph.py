@@ -135,17 +135,39 @@ def _extra(stage: str, values: object, plan: dict) -> str | None:
     if stage == "provider":
         if set(values) != {
             "desired_replicas", "running_instances", "all_instances_observed",
-            "pending_change",
+            "pending_change", "instances",
         }:
             return "PROVIDER_COUNTS_UNOBSERVED"
         if (
             not _count(values["desired_replicas"], minimum=1, maximum=64)
             or not _count(values["running_instances"], minimum=1, maximum=64)
-            or values["running_instances"] > values["desired_replicas"]
+            or values["running_instances"] != values["desired_replicas"]
             or values["all_instances_observed"] is not True
             or values["pending_change"] is not False
         ):
             return "PROVIDER_INSTANCES_UNVERIFIED"
+        instances = values["instances"]
+        if (
+            type(instances) is not list
+            or len(instances) != values["running_instances"]
+        ):
+            return "PROVIDER_INSTANCE_LIST_MISMATCH"
+        seen = set()
+        for instance in instances:
+            if type(instance) is not dict or set(instance) != {
+                "identity_digest", "image_digest", "status"
+            }:
+                return "PROVIDER_INSTANCE_RECORD_INVALID"
+            identity = instance["identity_digest"]
+            if (
+                not _sha(identity, _SHA64)
+                or identity in seen
+                or instance["image_digest"] != plan["bindings"]["image_digest"]
+                or instance["status"] != "running"
+                or type(instance["status"]) is not str
+            ):
+                return "PROVIDER_INSTANCE_IDENTITY_OR_IMAGE_MISMATCH"
+            seen.add(identity)
         return None
     if stage == "checkpoint":
         if set(values) != {
