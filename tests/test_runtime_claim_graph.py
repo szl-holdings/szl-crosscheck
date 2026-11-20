@@ -260,6 +260,18 @@ def test_source_not_reviewed_is_hold():
     assert assess(plan, nodes)["reason"] == "SOURCE_REVIEW_UNVERIFIED"
 
 
+def test_integer_one_does_not_count_as_protected_source_review():
+    plan, nodes = fixture()
+    node_at(nodes, "source")["claims"]["protected_reviewed_source"] = 1
+    assert assess(plan, nodes)["reason"] == "SOURCE_REVIEW_UNVERIFIED"
+
+
+def test_integer_one_does_not_count_as_independent_backup():
+    plan, nodes = fixture()
+    node_at(nodes, "backup")["claims"]["independent_storage_readback"] = 1
+    assert assess(plan, nodes)["reason"] == "INDEPENDENT_BACKUP_UNVERIFIED"
+
+
 def test_ci_skipped_qualification_cannot_be_green():
     plan, nodes = fixture()
     node_at(nodes, "ci")["claims"]["qualification_skips"] = 1
