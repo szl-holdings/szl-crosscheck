@@ -123,6 +123,26 @@ def test_threshold_finite_and_in_metric_bounds():
         assert result["reason"] == "DECLARED_THRESHOLD_INVALID"
 
 
+def test_unbounded_python_integers_fail_closed_without_overflow():
+    for value in (10**700, -(10**700)):
+        result = run(lambda p, o, value=value: o.update(value=value))
+        assert result["verdict"] == "HOLD"
+        assert result["reason"] == "MEASUREMENT_INVALID_OR_UNOBSERVED"
+        result = run(lambda p, o, value=value: p.update(threshold=value))
+        assert result["verdict"] == "HOLD"
+        assert result["reason"] == "DECLARED_THRESHOLD_INVALID"
+
+
+def test_finite_numeric_boundary_controls_are_unchanged():
+    for value, expected in (
+        (0, "DECLARED_PREDICATE_NOT_MET_UNATTESTED"),
+        (0.0, "DECLARED_PREDICATE_NOT_MET_UNATTESTED"),
+        (100, "DECLARED_PREDICATE_MET_UNATTESTED"),
+        (100.0, "DECLARED_PREDICATE_MET_UNATTESTED"),
+    ):
+        assert run(lambda p, o, value=value: o.update(value=value))["verdict"] == expected
+
+
 def test_metric_and_unit_mismatch_hold():
     result = run(lambda p, o: o.update(unit="celsius"))
     assert result["reason"] == "METRIC_UNIT_OR_IDENTITY_MISMATCH"

@@ -68,11 +68,14 @@ def _digest(value: object) -> bool:
 
 
 def _number(value: object, bounds: tuple[str, int, int]) -> bool:
-    return (
-        type(value) in (int, float)
-        and math.isfinite(value)
-        and bounds[1] <= value <= bounds[2]
-    )
+    if type(value) not in (int, float):
+        return False
+    try:
+        return math.isfinite(value) and bounds[1] <= value <= bounds[2]
+    except (OverflowError, TypeError, ValueError):
+        # int is unbounded in Python; converting a huge int to float can
+        # overflow even for a purely advisory numeric comparison.
+        return False
 
 
 def review_next_cycle(
