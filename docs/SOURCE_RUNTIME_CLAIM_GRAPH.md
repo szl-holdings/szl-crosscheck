@@ -35,6 +35,29 @@ negative-control outputs.
 | **Ireland — Lero AIware** — [research program](https://aiware-lero.github.io/) | Independent adversarial validation, fault localization, runtime monitoring and industrial-context reproducibility. | This Python source graph is not live telemetry or an independent evaluator. |
 | **vLLM serving/security** — [tenant boundary](https://docs.vllm.ai/en/stable/usage/security/) | A shared-process cache salt is **not** tenant isolation; test tenant authentication, negative cross-tenant queries, and process isolation when required. | The `tenant_boundary_negative_test` flag is merely an untrusted declared outcome until an independent gateway/serving audit verifies it. |
 
+### Public code and license snapshots inspected for this intake
+
+The following GitHub main revisions were returned by the connected source
+reader around 2026-11-20 02:30 UTC. A LICENSE-file header was inspected where
+noted; this is **not** a dependency license audit, and a moving `main` can
+change after observation.
+
+| Project | Observed GitHub commit | Root license file | Suggested SZL role |
+| --- | --- | --- | --- |
+| [VERSE](https://github.com/wzekai/VERSE) | `d8ff0adab0cf82e13d7878f84ff84f823cb2f6c9` | MIT | Reproducibility protocol for failure replay and agent patch regression |
+| [verl](https://github.com/verl-project/verl) | `3a909894862c9d298073618e742e2f3ce51e86fc` | Apache-2.0 | Separately admitted GRPO/rollout experimentation, **not** this gate |
+| [vLLM](https://github.com/vllm-project/vllm) | `898a7c68c2d1e869ebde2ce25ffbfc1e253bf0b4` | Apache-2.0 | Actual inference identities and tenant-isolation negative tests |
+| [SGLang](https://github.com/sgl-project/sglang) | `f913bf9aa1b6f9d428b3d521b72c42ed1d00292e` | Apache-2.0 | Alternative serving baseline under same hardware and traffic |
+| [Cosign](https://github.com/sigstore/cosign) | `339a3ca85413b4d89a49daf1eb554591c93ee365` | Apache-2.0 | External signed OCI digest verification, not a Python bool |
+| [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector) | `0c7a74cd0a4ab1c70834c91b67942eaaa9065825` | Apache-2.0 | Separate event/trace identities, not a proof of physical execution |
+| [Megatron Bridge](https://github.com/NVIDIA-NeMo/Megatron-Bridge) | `e0c16412af81f26f67a79ea450c9bc70c64a8c08` | Apache-2.0 | Full optimizer/RNG/dataloader checkpoint completeness criteria |
+
+Use exact revisions only after verifying author identity, LICENSE and NOTICE
+at that same commit, transitive dependencies, model/data usage rights and a
+source-owned test. **No bytes from these upstream repositories are vendored or
+executed in this PR.** KORMo/AIware references above are research practices,
+not dependency import candidates.
+
 **Reuse policy:** Open-source means investigate and reuse under the specific
 license and dependency/security terms, **not** take another project's name,
 authorship or code. Verify exact upstream Git commit, copyright/license,
