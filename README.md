@@ -51,8 +51,8 @@ pip install -e . pytest && python -m pytest tests/ -q
 import json
 from szl_crosscheck import crosscheck
 
-a = json.loads(open("stdlib-chain.json").read())
-b = json.loads(open("plane-chain.json").read())
+a = json.loads(open("evidence/2026-09-05/crosscheck-stdlib-chain-20260905.json").read())
+b = json.loads(open("evidence/2026-09-05/crosscheck-fastapi-chain-20260905.json").read())
 print(crosscheck(a, b, rel_tol=0.01)["verdict"])
 ```
 
